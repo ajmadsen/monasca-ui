@@ -13,7 +13,6 @@
 #  under the License.
 
 from django.test import RequestFactory
-from django.test.utils import override_settings
 from django.urls import reverse
 
 from monitoring.overview import constants
@@ -27,12 +26,6 @@ INDEX_URL = reverse(
 
 class OverviewTest(helpers.TestCase):
 
-    @override_settings(DASHBOARDS=[],
-                       KIBANA_POLICY_SCOPE='monitoring',
-                       KIBANA_POLICY_RULE='monitoring:kibana_access',
-                       ENABLE_LOG_MANAGEMENT_BUTTON=False,
-                       ENABLE_EVENT_MANAGEMENT_BUTTON=False,
-                       SHOW_GRAFANA_HOME=True)
     def test_index_get(self):
         res = self.client.get(INDEX_URL)
         self.assertTemplateUsed(
